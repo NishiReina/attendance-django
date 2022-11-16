@@ -38,6 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'django.contrib.sites', #user
+    'allauth', #user 
+    'allauth.account',  #user
+    'allauth.socialaccount',  #user
+    'allauth.socialaccount.providers.google', #add
+    'accounts',  #user
 ]
 
 MIDDLEWARE = [
@@ -104,9 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -122,3 +129,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = [ 
+    'django.contrib.auth.backends.ModelBackend',     
+    'allauth.account.auth_backends.AuthenticationBackend',
+] 
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'   # email+パスワード認証方式を指定
+ACCOUNT_USERNAME_REQUIRED = False         # ユーザ名を利用しない設定にする
+
+SITE_ID = 1   #django-allauthを利用する際に必要な設定
+LOGIN_REDIRECT_URL = 'home'   # ログインURLの設定
+LOGIN_URL = '/accounts/login/'   #ログイン画面を何処にするかの設定
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'   #ログアウトリダイレクトの設定
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'   #ユーザ登録確認メールを送信する
+ACCOUNT_EMAIL_REQUIRED = True    #メールアドレスを必須項目に指定
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #コンソール上にメッセージを表示
