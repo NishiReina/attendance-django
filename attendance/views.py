@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from attendance.models import Attendance
 from datetime import date
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+import string
+import secrets
 
 # Create your views here.
 
+@login_required
 def index(request):
     return render(request, 'attendance/index.html')
 
@@ -31,3 +35,17 @@ def show(request):
         'day' : day
     }
     return render(request, 'attendance/attendance.html', context)
+
+
+def create_token(request):
+    # パスワードの桁数
+    size = 12
+    # 英数文字列(大文字含む)、記号から選択
+    pool = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join([secrets.choice(pool) for _ in range(size)])
+    
+    context = {
+        'password' : password
+    }
+
+    return render(request, 'attendance/token.html', context)
