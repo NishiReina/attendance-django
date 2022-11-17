@@ -1,0 +1,15 @@
+{% extends "./base.html" %}
+{% block content %}
+<form action="attendance" method="POST">
+    {% csrf_token %}
+    <input type="date" name="date">
+    <button>検索</button>
+</form>
+<h1 class="today">{{day}}</h1>
+    {% for attendance in attendances %}
+    <div class="attendance">
+        <p class="name">{{attendance.user}}</p>
+        <p class="email">{{attendance.user.email}}</p>
+    </div>
+    {% endfor %}
+{% endblock %}
