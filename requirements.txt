@@ -3,6 +3,7 @@ dj-database-url
 dj-static
 python-decouple
 django-environ
+django-extensions
 gunicorn
 psycopg2-binary
 whitenoise
