@@ -14,7 +14,7 @@ services:
     branch: main
     healthCheckPath: /
     buildCommand: "./build.sh"
-    startCommand: "gunicorn AttendanceBLE.wsgi.application"
+    startCommand: "gunicorn --chdir AttendanceBLE AttendanceBLE.wsgi"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
