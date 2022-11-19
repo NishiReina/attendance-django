@@ -4,6 +4,7 @@ dj-static
 python-decouple
 django-environ
 django-extensions
+django-allauth
 gunicorn
 psycopg2-binary
 whitenoise
