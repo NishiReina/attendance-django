@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>出席アプリ</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <script>
         window.addEventListener('error', function(error) {
           if (ChromeSamples && ChromeSamples.setStatus) {
@@ -59,8 +61,8 @@
 </script>
 
 
-<button id="watchAdvertisements">出席</button>
-<button id="test">test</button>
+<button class="button" id="watchAdvertisements">出席</button>
+<button class="button" id="test">test</button>
 
 <script>
     // JavaScriptからLaravelへのデータ渡し成功！
@@ -145,7 +147,7 @@ function attendance(data){
 
         $.ajax({
             type: "POST", 
-            url: "/", //　送り先
+            url: "/store", //　送り先
             data: { 'data': data }, //　渡したいデータをオブジェクトで渡す
             dataType : "json", //　データ形式を指定
             scriptCharset: 'utf-8', //　文字コードを指定
@@ -167,10 +169,10 @@ function onWatchAdvertisementsButtonClick() {
   log('Requesting any Bluetooth device...');
   navigator.bluetooth.requestDevice({
 // filters: [...] <- Prefer filters to save energy & show relevant devices.
-    // acceptAllDevices: true,
-    filters: [
-    { services: [service_uuid] }
-    ]
+    acceptAllDevices: true,
+    // filters: [
+    // { services: [service_uuid] }
+    // ]
   })
   .then(device => {
     log('> Requested ' + device.name);
@@ -196,6 +198,7 @@ function onWatchAdvertisementsButtonClick() {
       str = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
       console.log(str);
       //
+      attendance(str)
     });
 
     log('Watching advertisements from "' + device.name + '"...');

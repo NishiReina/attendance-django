@@ -2,7 +2,7 @@
 {% block content %}
 <form action="attendance" method="POST">
     {% csrf_token %}
-    <input type="date" name="date">
+    <input type="date" name="date" required>
     <button>検索</button>
 </form>
 <h1 class="today">{{day}}</h1>

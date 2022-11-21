@@ -12,9 +12,11 @@ import secrets
 def index(request):
     return render(request, 'attendance/index.html')
 
+@login_required
 @csrf_exempt
 def store(request):
     jsonData = request.POST['data']
+    print(jsonData)
     if jsonData == 'Hello':
         attendance = Attendance.objects.filter(posted_at__date = date.today()).filter(user = request.user)
         if attendance.first() is None:
@@ -22,6 +24,7 @@ def store(request):
 
     return redirect('/attendance')
 
+@login_required
 def show(request):
     if request.method== 'POST':
         attendances = Attendance.objects.filter(posted_at__date = request.POST['date'])
@@ -37,6 +40,7 @@ def show(request):
     return render(request, 'attendance/attendance.html', context)
 
 
+@login_required
 def create_pass(request):
     # パスワードの桁数
     size = 12
