@@ -196,30 +196,13 @@ function onWatchAdvertisementsButtonClick() {
         logDataView('Service', key, valueDataView);
       });
       // 追加(別所先生のコード)
-      value = event.serviceData.get(service_uuid);
-      str = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
+      // value = event.serviceData.get(service_uuid);
+      // str = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
       str = "";
       console.log(str);
       //
-      $.ajax({
-            type: "POST", 
-            url: "/store", //　送り先
-            data: { 'data': str }, //　渡したいデータをオブジェクトで渡す
-            dataType : "json", //　データ形式を指定
-            scriptCharset: 'utf-8', //　文字コードを指定
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            }
-        })
-        .then(
-            function(param){　 //　paramに処理後のデータが入って戻ってくる
-                console.log(param); //　帰ってきたら実行する処理
-            },
-            function(XMLHttpRequest, textStatus, errorThrown){ //　エラーが起きた時はこちらが実行される
-                console.log(XMLHttpRequest); //　エラー内容表示
-        });
+      attendance(str);
     });
-    attendance(str);
     log('Watching advertisements from "' + device.name + '"...');
     return device.watchAdvertisements();  
   })
