@@ -178,7 +178,7 @@ function onWatchAdvertisementsButtonClick() {
     log('> Requested ' + device.name);
 
     device.addEventListener('advertisementreceived', (event) => {
-      console.log("get device")
+      console.log("get device");
       log('Advertisement received.');
       log('  Device Name: ' + event.device.name);
       log('  Device ID: ' + event.device.id);
