@@ -21,7 +21,7 @@ def index(request):
 def store(request):
     jsonData = request.POST['data']
     print(jsonData)
-    if jsonData == 'abc':
+    if jsonData == '':
         attendance = Attendance.objects.filter(posted_at__date = date.today()).filter(user = request.user)
         if attendance.first() is None:
             Attendance.objects.create(user=request.user)

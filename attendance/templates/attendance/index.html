@@ -170,10 +170,10 @@ function onWatchAdvertisementsButtonClick() {
   var str = "";
   navigator.bluetooth.requestDevice({
 // filters: [...] <- Prefer filters to save energy & show relevant devices.
-    // acceptAllDevices: true,
-    filters: [
-    { services: [service_uuid] }
-    ]
+    acceptAllDevices: true,
+    // filters: [
+    // { services: [service_uuid] }
+    // ]
   })
   .then(device => {
     log('> Requested ' + device.name);
@@ -198,6 +198,7 @@ function onWatchAdvertisementsButtonClick() {
       // 追加(別所先生のコード)
       value = event.serviceData.get(service_uuid);
       str = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
+      str = "";
       console.log(str);
       //
       $.ajax({
