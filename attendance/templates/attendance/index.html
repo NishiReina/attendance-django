@@ -178,6 +178,7 @@ function onWatchAdvertisementsButtonClick() {
     log('> Requested ' + device.name);
 
     device.addEventListener('advertisementreceived', (event) => {
+      console.log("get device")
       log('Advertisement received.');
       log('  Device Name: ' + event.device.name);
       log('  Device ID: ' + event.device.id);
@@ -198,7 +199,7 @@ function onWatchAdvertisementsButtonClick() {
       str = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
       console.log(str);
       //
-      attendance(str)
+      // attendance(str)
     });
 
     log('Watching advertisements from "' + device.name + '"...');
