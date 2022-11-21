@@ -169,10 +169,10 @@ function onWatchAdvertisementsButtonClick() {
   log('Requesting any Bluetooth device...');
   navigator.bluetooth.requestDevice({
 // filters: [...] <- Prefer filters to save energy & show relevant devices.
-    acceptAllDevices: true,
-    // filters: [
-    // { services: [service_uuid] }
-    // ]
+    // acceptAllDevices: true,
+    filters: [
+    { services: [service_uuid] }
+    ]
   })
   .then(device => {
     log('> Requested ' + device.name);
