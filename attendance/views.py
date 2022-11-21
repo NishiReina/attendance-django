@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 import string
 import secrets
 
+import json
+from django.http.response import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 # Create your views here.
 
 @login_required
@@ -41,6 +45,7 @@ def show(request):
 
 
 @login_required
+@ensure_csrf_cookie
 def create_pass(request):
     # パスワードの桁数
     size = 12
@@ -52,4 +57,5 @@ def create_pass(request):
         'password' : password
     }
 
-    return render(request, 'attendance/token.html', context)
+    # return render(request, 'attendance/token.html', context)
+    return JsonResponse(context)
