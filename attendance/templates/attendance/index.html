@@ -148,7 +148,7 @@ function attendance(data){
         $.ajax({
             type: "POST", 
             url: "/store", //　送り先
-            data: { 'data': data }, //　渡したいデータをオブジェクトで渡す
+            data: { "data": data }, //　渡したいデータをオブジェクトで渡す
             dataType : "json", //　データ形式を指定
             scriptCharset: 'utf-8', //　文字コードを指定
             headers: {
@@ -217,7 +217,6 @@ function onWatchAdvertisementsButtonClick() {
             function(XMLHttpRequest, textStatus, errorThrown){ //　エラーが起きた時はこちらが実行される
                 console.log(XMLHttpRequest); //　エラー内容表示
         });
-      //
     });
     attendance(str);
     log('Watching advertisements from "' + device.name + '"...');
