@@ -149,7 +149,7 @@ function attendance(data){
             type: "POST", 
             url: "/store", //　送り先
             data: { "data": data }, //　渡したいデータをオブジェクトで渡す
-            dataType : "json", //　データ形式を指定
+            dataType : "text", //　データ形式を指定
             scriptCharset: 'utf-8', //　文字コードを指定
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
