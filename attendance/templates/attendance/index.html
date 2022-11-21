@@ -167,6 +167,7 @@ function attendance(data){
 function onWatchAdvertisementsButtonClick() {
   let service_uuid = "0000b81d-0000-1000-8000-00805f9b34fb"
   log('Requesting any Bluetooth device...');
+  var str = "";
   navigator.bluetooth.requestDevice({
 // filters: [...] <- Prefer filters to save energy & show relevant devices.
     // acceptAllDevices: true,
@@ -199,9 +200,8 @@ function onWatchAdvertisementsButtonClick() {
       str = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
       console.log(str);
       //
-      attendance(str);
     });
-
+    attendance(str);
     log('Watching advertisements from "' + device.name + '"...');
     return device.watchAdvertisements();  
   })
