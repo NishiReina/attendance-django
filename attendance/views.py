@@ -7,6 +7,7 @@ import string
 import secrets
 
 import json
+from django.http import HttpResponse
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 
@@ -46,7 +47,7 @@ def show(request):
 
 @login_required
 @ensure_csrf_cookie
-def create_pass(request):
+def create_pass(request, status=None):
     # パスワードの桁数
     size = 12
     # 英数文字列(大文字含む)、記号から選択
@@ -57,5 +58,8 @@ def create_pass(request):
         'password' : password
     }
 
+    json_str = json.dumps(context, ensure_ascii=False, indent=2)
+
     # return render(request, 'attendance/token.html', context)
-    return JsonResponse(context)
+    response = HttpResponse(json_str,content_type='application/json; charset=UTF-8', status=status)
+    return response
