@@ -18,16 +18,16 @@ from django.urls import path, include
 from django.views.generic import TemplateView 
 from rest_framework import routers
 
-# from attendance.views import PasscodeInfoViewSet
-# # DefaultRouter クラスのインスタンスを代入
-# defaultRouter = routers.DefaultRouter()
-# # userInfo/ にUserInfoViewSetをルーティングする
-# defaultRouter.register('passcodeInfo',PasscodeInfoViewSet)
+from attendance.views import PasscodeInfoViewSet
+# DefaultRouter クラスのインスタンスを代入
+defaultRouter = routers.DefaultRouter()
+# userInfo/ にUserInfoViewSetをルーティングする
+defaultRouter.register('passcodeInfo',PasscodeInfoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', include('attendance.urls')),
     path('home', TemplateView.as_view(template_name='accounts/home.html'), name='home'), #追加
     path('accounts/', include('allauth.urls')), 
-    # path('api/', include(defaultRouter.urls))
+    path('api/', include(defaultRouter.urls))
 ]
