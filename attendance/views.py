@@ -5,9 +5,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 import string
 import secrets
-from .models import Passcode
+# from .models import Passcode
 from rest_framework import viewsets
-from .serializer import PasscodeInfoSerializer
+# from .serializer import PasscodeInfoSerializer
 
 import json
 from django.http import HttpResponse
@@ -69,16 +69,16 @@ def create_pass():
     # response = HttpResponse(json_str,content_type='application/json; charset=UTF-8', status=status)
     # return response
 
-class PasscodeInfoViewSet(viewsets.ModelViewSet):
+# class PasscodeInfoViewSet(viewsets.ModelViewSet):
 
-    # パスワードの桁数
-    size = 12
-    # 英数文字列(大文字含む)、記号から選択
-    pool = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join([secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(size)])
-    Passcode.objects.create(passcode = password)
+#     # パスワードの桁数
+#     size = 12
+#     # 英数文字列(大文字含む)、記号から選択
+#     pool = string.ascii_letters + string.digits + string.punctuation
+#     password = ''.join([secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(size)])
+#     Passcode.objects.create(passcode = password)
 
-    # モデルのオブジェクトを取得
-    queryset = Passcode.objects.all()
-    # シリアライザーを取得
-    serializer_class = PasscodeInfoSerializer
+#     # モデルのオブジェクトを取得
+#     queryset = Passcode.objects.all()
+#     # シリアライザーを取得
+#     serializer_class = PasscodeInfoSerializer
