@@ -196,11 +196,10 @@ function onWatchAdvertisementsButtonClick() {
         logDataView('Service', key, valueDataView);
       });
       // 追加(別所先生のコード)
-      // value = event.serviceData.get(service_uuid);
-      // str = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
-      str = "";
+      value = event.serviceData.get(service_uuid);
+      str = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
+      // str = "";
       console.log(str);
-      //
       attendance(str);
     });
     log('Watching advertisements from "' + device.name + '"...');
