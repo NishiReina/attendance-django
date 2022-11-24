@@ -91,7 +91,7 @@ class PasscodeInfoViewSet(viewsets.ModelViewSet):
     password = ''.join([secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(size)])
     
     passcode = Passcode.objects.filter(created_at__date = date.today())
-    if passcode.first() is None:
+    if passcode.count() == 0:
         Passcode.objects.create(passcode = password)
 
     # モデルのオブジェクトを取得
