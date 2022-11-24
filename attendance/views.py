@@ -27,7 +27,7 @@ def store(request):
     print(jsonData)
     if jsonData == '':
         attendance = Attendance.objects.filter(posted_at__date = date.today()).filter(user = request.user)
-        if attendance.first() is None:
+        if attendance.count() == 0:
             Attendance.objects.create(user=request.user)
 
     return redirect('/attendance')
