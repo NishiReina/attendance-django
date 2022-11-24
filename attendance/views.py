@@ -97,7 +97,7 @@ class PasscodeInfoViewSet(viewsets.ModelViewSet):
     # モデルのオブジェクトを取得
     data = Passcode.objects.filter(created_at__date = date.today()).last()
     id = data.id
-    # queryset = Passcode.objects.filter(id=id)
+    queryset = Passcode.objects.filter(id=id)
     # シリアライザーを取得
-    queryset = Passcode.objects.all()
+    # queryset = Passcode.objects.all()
     serializer_class = PasscodeInfoSerializer
