@@ -25,7 +25,7 @@ def index(request):
 def store(request):
     jsonData = request.POST['data']
     passcode = Passcode.objects.filter(created_at__date = date.today()).last()
-    if jsonData == '':
+    if jsonData == passcode.passcode:
         attendance = Attendance.objects.filter(posted_at__date = date.today()).filter(user = request.user)
         if attendance.count() == 0:
             Attendance.objects.create(user=request.user)
@@ -90,9 +90,9 @@ class PasscodeInfoViewSet(viewsets.ModelViewSet):
     pool = string.ascii_letters + string.digits + string.punctuation
     password = ''.join([secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(size)])
     
-    passcode = Passcode.objects.filter(created_at__date = date.today())
-    if passcode.count() == 0:
-        Passcode.objects.create(passcode = password)
+    # passcode = Passcode.objects.filter(created_at__date = date.today())
+    # if passcode.count() == 0:
+    Passcode.objects.create(passcode = password)
 
     # モデルのオブジェクトを取得
     data = Passcode.objects.filter(created_at__date = date.today()).last()
