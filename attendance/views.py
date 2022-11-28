@@ -88,7 +88,7 @@ class PasscodeInfoViewSet(viewsets.ModelViewSet):
     size = 5
     # 英数文字列(大文字含む)、記号から選択
     pool = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join([secrets.choice(string.ascii_letters + string.digits) for _ in range(size)])
+    password = ''.join([secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(size)])
     
     passcode = Passcode.objects.filter(created_at__date = date.today())
     if passcode.count() == 0:
