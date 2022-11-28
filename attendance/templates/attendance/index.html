@@ -167,8 +167,8 @@ function attendance(data){
         f.method = 'post';
         f.action = '/store';
         f.innerHTML = '<input name="data" value=' + data + '>';
-        document.body.append(form);
-        form.submit();
+        document.body.append(f);
+        f.submit();
 }
 
 function onWatchAdvertisementsButtonClick() {
