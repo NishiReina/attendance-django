@@ -48,39 +48,6 @@ def show(request):
     return render(request, 'attendance/attendance.html', context)
 
 
-@login_required
-@ensure_csrf_cookie
-def create_pass(request):
-    # パスワードの桁数
-    size = 12
-    # 英数文字列(大文字含む)、記号から選択
-    pool = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join([secrets.choice(pool) for _ in range(size)])
-
-    passcode = Passcode.objects.filter(created_at__date = date.today())
-    if passcode.count() == 0:
-        Passcode.objects.create(passcode = password)
-
-    passcode = Passcode.objects.filter(created_at__date = date.today()).first()
-
-    # passcode = Passcode.objects.all()
-
-    # return passcode
-    context = {
-        'passcode' : passcode
-    }
-
-    return render(request, 'attendance/token.html', context)    
-
-    # context = {
-    #     'password' : password
-    # }
-
-    # json_str = json.dumps(context, ensure_ascii=False, indent=2)
-
-    # # return render(request, 'attendance/token.html', context)
-    # response = HttpResponse(json_str,content_type='application/json; charset=UTF-8', status=status)
-    # return response
 
 class PasscodeInfoViewSet(viewsets.ModelViewSet):
 
@@ -90,9 +57,9 @@ class PasscodeInfoViewSet(viewsets.ModelViewSet):
     pool = string.ascii_letters + string.digits + string.punctuation
     password = ''.join([secrets.choice(string.ascii_letters + string.digits) for _ in range(size)])
     
-    # passcode = Passcode.objects.filter(created_at__date = date.today())
-    # if passcode.count() == 0:
-    Passcode.objects.create(passcode = password)
+    passcode = Passcode.objects.filter(created_at__date = date.today())
+    if passcode.count() == 0:
+        Passcode.objects.create(passcode = password)
 
     # モデルのオブジェクトを取得
     data = Passcode.objects.filter(created_at__date = date.today()).last()
