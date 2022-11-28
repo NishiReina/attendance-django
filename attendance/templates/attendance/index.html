@@ -62,35 +62,7 @@
 
 
 <button class="button" id="watchAdvertisements">出席</button>
-<button class="button" id="test">test</button>
 
-<script>
-    // JavaScriptからLaravelへのデータ渡し成功！
-    document.getElementById('test').addEventListener('click', function() {
-        console.log("test1");
-        const data = 'Hello'; // 渡したいデータ
-        $.ajax({
-            type: "POST", 
-            url: "/store", //　送り先
-            data: { 
-                'data': data, 
-                "csrfmiddlewaretoken" : $('input[name=csrfmiddlewaretoken]').val() 
-            }, //　渡したいデータをオブジェクトで渡す
-            dataType : "json", //　データ形式を指定
-            scriptCharset: 'utf-8', //　文字コードを指定
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            }
-        })
-        .then(
-            function(param){  //　paramに処理後のデータが入って戻ってくる
-                console.log(param); //　帰ってきたら実行する処理
-            },
-            function(XMLHttpRequest, textStatus, errorThrown){ //　エラーが起きた時はこちらが実行される
-                console.log(XMLHttpRequest); //　エラー内容表示
-        });
-    });
-</script>
 
 <script>
   var ChromeSamples = {
@@ -120,13 +92,20 @@
   };
 </script>
 
-<h3>リアルタイム　アウトプット</h3>
-<div id="output" class="output">
-  <div id="content"></div>
-  <div id="status"></div>
-  <pre id="log"></pre>
+<div class="none">
+  <h3>リアルタイム　アウトプット</h3>
+  <div id="output" class="output">
+    <div id="content"></div>
+    <div id="status"></div>
+    <pre id="log"></pre>
+  </div>
 </div>
 
+<style>
+  .none{
+    display: none;
+  }
+</style>
 
 <script>
   if (/Chrome\/(\d+\.\d+.\d+.\d+)/.test(navigator.userAgent)){
@@ -167,8 +146,8 @@ function attendance(data){
         f.method = 'post';
         f.action = '/store';
         f.innerHTML = '<input name="data" value=' + data + '>';
-        document.body.append(f);
-        f.submit();
+        document.body.append(form);
+        form.submit();
 }
 
 function onWatchAdvertisementsButtonClick() {
