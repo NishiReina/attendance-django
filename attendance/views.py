@@ -30,7 +30,8 @@ def store(request):
         if attendance.count() == 0:
             Attendance.objects.create(user=request.user)
 
-    return redirect('/attendance')
+    # return redirect('/attendance')
+    return render(request, 'attendance/done.html')
 
 @login_required
 def show(request):
