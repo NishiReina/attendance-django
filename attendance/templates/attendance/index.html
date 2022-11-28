@@ -8,13 +8,13 @@
     <title>出席アプリ</title>
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <script>
-        // window.addEventListener('error', function(error) {
-        //   if (ChromeSamples && ChromeSamples.setStatus) {
-        //     console.error(error);
-        //     ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
-        //     error.preventDefault();
-        //   }
-        // });
+        window.addEventListener('error', function(error) {
+          if (ChromeSamples && ChromeSamples.setStatus) {
+            console.error(error);
+            ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
+            error.preventDefault();
+          }
+        });
     </script> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
@@ -62,7 +62,35 @@
 
 
 <button class="button" id="watchAdvertisements">出席</button>
+<button class="button" id="test">test</button>
 
+<script>
+    // JavaScriptからLaravelへのデータ渡し成功！
+    document.getElementById('test').addEventListener('click', function() {
+        console.log("test1");
+        const data = 'Hello'; // 渡したいデータ
+        $.ajax({
+            type: "POST", 
+            url: "/store", //　送り先
+            data: { 
+                'data': data, 
+                "csrfmiddlewaretoken" : $('input[name=csrfmiddlewaretoken]').val() 
+            }, //　渡したいデータをオブジェクトで渡す
+            dataType : "json", //　データ形式を指定
+            scriptCharset: 'utf-8', //　文字コードを指定
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            }
+        })
+        .then(
+            function(param){  //　paramに処理後のデータが入って戻ってくる
+                console.log(param); //　帰ってきたら実行する処理
+            },
+            function(XMLHttpRequest, textStatus, errorThrown){ //　エラーが起きた時はこちらが実行される
+                console.log(XMLHttpRequest); //　エラー内容表示
+        });
+    });
+</script>
 
 <script>
   var ChromeSamples = {
@@ -92,20 +120,13 @@
   };
 </script>
 
-<div class="none">
-  <h3>リアルタイム　アウトプット</h3>
-  <div id="output" class="output">
-    <div id="content"></div>
-    <div id="status"></div>
-    <pre id="log"></pre>
-  </div>
+<h3>リアルタイム　アウトプット</h3>
+<div id="output" class="output">
+  <div id="content"></div>
+  <div id="status"></div>
+  <pre id="log"></pre>
 </div>
 
-<style>
-  /* .none{
-    display: none;
-  } */
-</style>
 
 <script>
   if (/Chrome\/(\d+\.\d+.\d+.\d+)/.test(navigator.userAgent)){
